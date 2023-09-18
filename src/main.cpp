@@ -51,7 +51,8 @@ void taskCanInput() {
                 canInput[i] = strtol(strByte.c_str(), nullptr, 16);
             }
 
-            if (const int emptyData = 8 - strData.length() / 2; emptyData > 0)
+            const int emptyData = 8 - strData.length() / 2;
+            if (emptyData > 0)
                 for (int i = 8; i > 8 - emptyData; i--)
                     canInput[i] = 0;
         }
