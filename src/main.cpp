@@ -69,7 +69,7 @@ void loop() {
     taskCanInput();
 
     if (input) {
-        input = 0;
+        input = false;
         CAN.sendMsgBuf(canId, 0, 8, canInput);
         for (int i = 0; i < 8; i++)
             canInput[i] = 0;
