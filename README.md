@@ -1,5 +1,5 @@
- ## CanOnSerialCom
-![EX](https://github.com/absolut-pi/arduino-can-bus-mirroring/assets/79029454/d9bad1d1-7ddd-44a9-9672-87c7d2cabcb3)
+ ## arduino-can-bus-mirroring
+![image](https://github.com/absolut-pi/arduino-can-bus-mirroring/assets/79029454/a17d5992-810e-4b99-a326-7e70e0290938)
 
  Check also:
  https://github.com/absolut-pi/can-on-serial-com
