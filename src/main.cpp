@@ -26,9 +26,14 @@ void taskCanRecv() {
     if (CAN_MSGAVAIL == CAN.checkReceive()) {
         CAN.readMsgBuf(&len, buf);
 
-        SERIAL_PORT_MONITOR.println(CAN.getCanId(), HEX);
-        for (int i = 0; i < len; i++)
+        SERIAL_PORT_MONITOR.print(CAN.getCanId(), HEX);
+        SERIAL_PORT_MONITOR.print(" ");
+
+        for (int i = 0; i < len; i++) {
             SERIAL_PORT_MONITOR.print(buf[i], HEX);
+            SERIAL_PORT_MONITOR.print(" ");
+        }
+
         SERIAL_PORT_MONITOR.println();
     }
 }
@@ -40,7 +45,7 @@ void taskCanInput() {
 
         if (strInput.length() > 0) {
             input = true;
-            
+
             const auto strId = strInput.substring(0, 3);
             const auto strData = strInput.substring(4, strInput.length());
 
