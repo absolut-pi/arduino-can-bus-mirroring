@@ -34,18 +34,26 @@ void taskCanRecv() {
 }
 
 void taskCanInput() {
+    // example data: 123 00 00 00 00 00 00 00 00
     while (SERIAL_PORT_MONITOR.available()) {
-        String strInput = SERIAL_PORT_MONITOR.readStringUntil('\n');
+        const auto strInput = SERIAL_PORT_MONITOR.readStringUntil('\n');
 
         if (strInput.length() > 0) {
             input = true;
-            for (int i = 0; i < 8; i++)
-                if (i == 0)
-                    canId = strInput.toInt();
-                else
-                    canInput[i - 1] = strtoul(
-                        strInput.substring(i * 3 - 2, i * 3 + 1).c_str(), NULL,
-                        16);
+            
+            const auto strId = strInput.substring(0, 3);
+            const auto strData = strInput.substring(4, strInput.length());
+
+            canId = strtol(strId.c_str(), nullptr, 16);
+
+            for (int i = 0; i < 8; i++) {
+                const auto strByte = strData.substring(i * 2, i * 2 + 2);
+                canInput[i] = strtol(strByte.c_str(), nullptr, 16);
+            }
+
+            if (const int emptyData = 8 - strData.length() / 2; emptyData > 0)
+                for (int i = 8; i > 8 - emptyData; i--)
+                    canInput[i] = 0;
         }
     }
 }
